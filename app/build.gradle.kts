@@ -10,6 +10,10 @@ android {
     namespace = "br.com.mizaeldouglas.annotation_app"
     compileSdk = 35
 
+    ksp {
+        arg("room.schemaLocation", "$projectDir/schemas")
+    }
+
     defaultConfig {
         applicationId = "br.com.mizaeldouglas.annotation_app"
         minSdk = 24
@@ -18,6 +22,12 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] = "$projectDir/schemas".toString()
+            }
+        }
     }
 
     buildTypes {

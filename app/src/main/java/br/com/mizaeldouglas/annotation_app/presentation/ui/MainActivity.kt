@@ -11,8 +11,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import br.com.mizaeldouglas.annotation_app.R
 import br.com.mizaeldouglas.annotation_app.data.database.DataBase
+import br.com.mizaeldouglas.annotation_app.data.entity.CategoryEntity
 import br.com.mizaeldouglas.annotation_app.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -32,6 +36,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         initializeBarMenu()
         initializeEventClick()
+
+        // Test ROOM
+        val categoryDAO = database.categoryDao
+        CoroutineScope(Dispatchers.IO).launch {
+            val categoryEntity = CategoryEntity(0, "Teste")
+            categoryDAO.insertCategory(categoryEntity)
+        }
 
     }
 
