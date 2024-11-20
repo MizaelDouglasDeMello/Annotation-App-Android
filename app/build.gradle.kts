@@ -48,10 +48,19 @@ android {
     }
     buildFeatures {
         viewBinding = true
+
     }
 }
 
 dependencies {
+
+    implementation("androidx.collection:collection-ktx:1.4.5")
+
+    // ViewModel
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Lifecycles only (without ViewModel or LiveData)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(libs.androidx.room.runtime)
 

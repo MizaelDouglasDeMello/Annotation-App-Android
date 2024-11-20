@@ -15,6 +15,8 @@ class RegisterAnnotationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+
+
         binding.btnAddCategory.setOnClickListener {
             startActivity(Intent(this, RegisterCategoryActivity::class.java))
         }

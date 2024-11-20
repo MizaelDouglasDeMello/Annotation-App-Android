@@ -7,17 +7,14 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuProvider
 import br.com.mizaeldouglas.annotation_app.R
-import br.com.mizaeldouglas.annotation_app.data.database.DataBase
 import br.com.mizaeldouglas.annotation_app.data.entity.CategoryEntity
 import br.com.mizaeldouglas.annotation_app.databinding.ActivityMainBinding
+import br.com.mizaeldouglas.annotation_app.presentation.viewmodel.CategoryViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -26,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
-    @Inject
-    lateinit var database: DataBase
+    private val categoryViewModel: CategoryViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,12 +33,14 @@ class MainActivity : AppCompatActivity() {
         initializeBarMenu()
         initializeEventClick()
 
+        categoryViewModel.insertCategory(CategoryEntity(0, "test viewRepo"))
+
         // Test ROOM
-        val categoryDAO = database.categoryDao
+        /*val categoryDAO = database.categoryDao
         CoroutineScope(Dispatchers.IO).launch {
             val categoryEntity = CategoryEntity(0, "Teste")
             categoryDAO.insertCategory(categoryEntity)
-        }
+        }*/
 
     }
 
